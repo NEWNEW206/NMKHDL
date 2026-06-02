@@ -4,7 +4,7 @@ Kế hoạch Dự án Khoa học Dữ liệu: Lối sống & Kết quả học t
 
 ---
 
-## 1. Phân chia vai trò & Tỷ lệ đóng góp giá trị (Contribution Weight)
+## 1. Phân chia vai trò 
 | STT | Thành viên | Vai trò đảm nhiệm | Chi tiết nội dung công việc | Đóng góp giá trị |
 | :---: | :--- | :--- | :--- | :---: |
 | **1** | **Thành viên 1** | **Project Manager & Integrator** | - Thiết kế kiến trúc dự án DS chuẩn.<br>- Điều phối luồng và tích hợp mã nguồn chính.<br>- Viết tài liệu kiểm thử cuối cùng. | **10%** |
