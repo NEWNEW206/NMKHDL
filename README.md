@@ -42,6 +42,7 @@ student_lifestyle_ml_project/
 │
 ├── requirements.txt           # Danh sách các thư viện hỗ trợ
 ├── main.py                    # Chương trình chính điều phối pipeline chạy tự động
+├── report.md                  # Báo cáo kết quả nghiên cứu khoa học gửi giảng viên
 └── README.md                  # Hướng dẫn chạy & Phân công công việc nhóm
 ```
 
