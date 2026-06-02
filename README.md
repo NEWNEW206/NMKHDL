@@ -83,9 +83,9 @@ student_lifestyle_ml_project/
 *   **Các bước làm**:
     1. Viết các hàm xử lý trong file `src/feature_engineering.py`.
     2. Thiết lập đặc trưng mới **`Total_Productive_Hours`** (Tổng giờ hoạt động hiệu quả trong ngày):
-       $$\text{Total\_Productive\_Hours} = \text{Study\_Hours\_Per\_Day} + \text{Physical\_Activity\_Hours\_Per\_Day} + \text{Extracurricular\_Hours\_Per\_Day}$$
+       $$\text{Total Productive Hours} = \text{Study Hours Per Day} + \text{Physical Activity Hours Per Day} + \text{Extracurricular Hours Per Day}$$
     3. Thiết lập đặc trưng mới **`Free_Time`** (Thời gian rảnh rỗi thực sự còn lại trong ngày):
-       $$\text{Free\_Time} = 24 - (\text{Tổng số giờ của tất cả các hoạt động học tập, ngoại khóa, thể thao, ngủ và giao lưu})$$
+       $$\text{Free Time} = 24 - (\text{Tổng số giờ của tất cả các hoạt động học tập, ngoại khóa, thể thao, ngủ và giao lưu})$$
     4. Sử dụng hàm `.clip(lower=0)` của pandas đối với cột `Free_Time` để ngăn ngừa các giá trị âm phát sinh do sai lệch nhỏ trong quá trình sinh viên tự ghi nhận khảo sát thô.
 
 ### Thành viên 5: Regression Engineer (Mô hình Hồi quy dự đoán GPA)
