@@ -88,7 +88,7 @@ student_lifestyle_ml_project/
     3. Thiết lập đặc trưng mới **`Free_Time`** (Thời gian rảnh rỗi thực sự còn lại trong ngày):
        $$\text{Free Time} = 24 - (\text{Tổng số giờ của tất cả các hoạt động học tập, ngoại khóa, thể thao, ngủ và giao lưu})$$
     4. Thiết lập đặc trưng mới **`Study_Productive_Ratio`** (Tỷ lệ ưu tiên học tập):
-       $$\text{Study_Productive_Ratio} = (\text{Số giờ học chia / Tổng số giờ hoạt động hiệu quả (học tập + thể thao + ngoại khóa)})$$
+       $$\text{Study_Productive_Ratio} = (\text{Số giờ học chia cho Tổng số giờ hoạt động hiệu quả (học tập + thể thao + ngoại khóa)})$$
     5. Sử dụng hàm `.clip(lower=0)` của pandas đối với cột `Free_Time` để ngăn ngừa các giá trị âm phát sinh do sai lệch nhỏ trong quá trình sinh viên tự ghi nhận khảo sát thô.
 
 ### Thành viên 5: Regression Engineer (Mô hình Hồi quy dự đoán GPA)
