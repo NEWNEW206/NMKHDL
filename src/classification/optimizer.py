@@ -19,7 +19,7 @@ class ModelOptimizer:
                 'random_state': 42
             }
             model = RandomForestClassifier(**params)
-            score = cross_val_score(model, self.X_train, self.y_train, cv=3, scoring='f1_weighted').mean()
+            score = cross_val_score(model, self.X_train, self.y_train, cv=5, scoring='f1_weighted').mean()
             return score
 
         study = optuna.create_study(direction='maximize') #Tối ưa hóa score
@@ -39,7 +39,7 @@ class ModelOptimizer:
                 'random_state': 42
             }
             model = SVC(**params)
-            score = cross_val_score(model, self.X_train, self.y_train, cv=3, scoring='f1_weighted').mean()
+            score = cross_val_score(model, self.X_train, self.y_train, cv=5, scoring='f1_weighted').mean()
             return score
 
         study = optuna.create_study(direction='maximize') #Tối ưa hóa score
