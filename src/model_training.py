@@ -35,7 +35,10 @@ def _get_regression_models():
     return {
         "LinearRegression": LinearRegression(),
         "Ridge": Ridge(alpha=1.0, random_state=42),
-        "DecisionTreeRegressor": DecisionTreeRegressor(random_state=42),
+        "DecisionTreeRegressor": DecisionTreeRegressor(
+          max_depth=3, min_samples_leaf=10,
+          min_samples_split=2, random_state=42                              
+        ),
         "RandomForestRegressor": RandomForestRegressor(
             n_estimators=100, random_state=42, n_jobs=-1
         ),
