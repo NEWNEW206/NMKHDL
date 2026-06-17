@@ -1,7 +1,7 @@
 @echo off
-echo ===================================================
+echo =====================================================
 echo   CHAY CHUONG TRINH DO AN NHAP MON KHOA HOC DU LIEU
-echo ===================================================
+echo =====================================================
 
 echo [1] Dang kiem tra va cai dat thu vien tu requirements.txt...
 pip install -r requirements.txt

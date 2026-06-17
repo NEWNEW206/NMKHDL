@@ -26,7 +26,7 @@ def train_and_evaluate_classification(X_train, X_test, y_train, y_test):
     results = []
     
     print("\n" + "="*50)
-    print(" CHI TIẾT THAM SỐ VÀ KẾT QUẢ TỪNG MÔ HÌNH ")
+    print("     CHI TIẾT THAM SỐ VÀ KẾT QUẢ TỪNG MÔ HÌNH ")
     print("="*50)
 
     for name, model in models.items():
@@ -65,9 +65,9 @@ def train_and_evaluate_classification(X_train, X_test, y_train, y_test):
     results_path = os.path.join(outputs_dir, "classification_results.csv")
     df_results.to_csv(results_path, index=False)
     
-    print("\n" + "-"*50)
-    print(" BẢNG TỔNG HỢP SO SÁNH 5 MÔ HÌNH ")
-    print("-"*50)
+    print("\n" + "="*50)
+    print("         BẢNG TỔNG HỢP SO SÁNH 5 MÔ HÌNH     ")
+    print("="*50)
     print(df_results.to_string(index=False))
     print(f"\n Đã lưu bảng kết quả tại: {results_path}")
     print(f" Đã lưu toàn bộ 5 file mô hình (.pkl) tại thư mục 'outputs/classification/'")
