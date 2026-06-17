@@ -3,7 +3,7 @@ import joblib
 import pandas as pd
 from src.classification.models import get_baseline_models
 from src.classification.optimizer import ModelOptimizer
-from src.classification.evaluate import calculate_metrics, plot_confusion_matrix, plot_learning_curve, analyze_decision_tree_overfitting
+from src.classification.evaluate import calculate_metrics, plot_confusion_matrix, plot_learning_curve
 
 def train_and_evaluate_classification(X_train, X_test, y_train, y_test):
     # Sử dụng đường dẫn tuyệt đối để tránh bị lưu nhầm ra ngoài thư mục gốc
@@ -65,17 +65,15 @@ def train_and_evaluate_classification(X_train, X_test, y_train, y_test):
     results_path = os.path.join(outputs_dir, "classification_results.csv")
     df_results.to_csv(results_path, index=False)
     
-    print("\n" + "="*50)
-    print("         BẢNG TỔNG HỢP SO SÁNH 5 MÔ HÌNH     ")
-    print("="*50)
+    print("\n" + "="*60)
+    print("      BẢNG SO SÁNH CÁC MÔ HÌNH PHÂN LOẠI (STRESS LEVEL)")
+    print("="*60)
     print(df_results.to_string(index=False))
     print(f"\n Đã lưu bảng kết quả tại: {results_path}")
     print(f" Đã lưu toàn bộ 5 file mô hình (.pkl) tại thư mục 'outputs/classification/'")
     
-    # 1. Thực hiện phân tích Overfitting của DecisionTreeClassifier (Thành viên 6)
-    analyze_decision_tree_overfitting(X_train, X_test, y_train, y_test)
-    
-    # 2. Tìm và lưu mô hình tốt nhất (Best Model) dựa trên F1-Score vào thư mục models/ ở gốc (Thành viên 6)
+
+    # 2. Tìm và lưu mô hình tốt nhất (Best Model) dựa trên F1-Score vào thư mục models/ ở gốc
     root_models_dir = os.path.join(base_dir, "models")
     os.makedirs(root_models_dir, exist_ok=True)
     best_idx = df_results['F1-Score'].idxmax()

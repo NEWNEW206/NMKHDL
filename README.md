@@ -26,7 +26,11 @@ NMKHDL/
 │
 ├── models/                    # Lưu trữ các mô hình đã huấn luyện (best_model.pkl)
 │
+├── notebooks/                 # Thư mục chứa script kiểm thử và phân tích phụ trợ
+│   └── test_preprocessing.py  # Script chạy thử nghiệm module tiền xử lý dữ liệu
+│
 ├── src/                       # Mã nguồn phát triển chính dạng module
+│   ├── EDA.ipynb              # Phân tích khám phá dữ liệu trực quan (Jupyter Notebook)
 │   ├── data_preprocessing.py  # Xử lý làm sạch và chuẩn hóa thang đo
 │   ├── feature_engineering.py # Tạo lập đặc trưng mới
 │   └── classification/        # Module phân loại chính (OOP)
@@ -40,8 +44,7 @@ NMKHDL/
 ├── run_pipeline.sh            # File script tự động cài đặt và chạy (Linux/Mac)
 ├── Dockerfile                 # File cấu hình môi trường Docker
 ├── requirements.txt           # Danh sách các thư viện hỗ trợ
-├── README.md                  # Phân công công việc nhóm và hướng dẫn chi tiết
-└── TeamMemberRoles.md         # Hướng dẫn chạy dự án (Running Guide)
+└── README.md                  # Hướng dẫn chạy dự án và thông tin chi tiết
 ```
 
 ## 3. Hướng dẫn Chạy Dự án

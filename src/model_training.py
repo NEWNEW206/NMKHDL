@@ -1,6 +1,5 @@
 """
 Module: model_training.py
-Thành viên 5 – Regression Engineer
 Mục tiêu: Dự báo điểm số liên tục (GPA) bằng 5 mô hình hồi quy,
            đánh giá bằng R², MAE, RMSE, vẽ biểu đồ phân tán (Scatter Plot)
            so sánh GPA thực tế và GPA dự đoán, xuất bảng so sánh kết quả.
@@ -138,10 +137,6 @@ def train_and_evaluate_regression(X_train, X_test, y_train, y_test):
 
     results = []
 
-    print("\n" + "=" * 60)
-    print("   REGRESSION PIPELINE – DỰ ĐOÁN ĐIỂM GPA (Thành viên 5)")
-    print("=" * 60)
-
     for name, model in models.items():
         # 1. Huấn luyện mô hình trên tập Train
         model.fit(X_train, y_train)
@@ -157,12 +152,6 @@ def train_and_evaluate_regression(X_train, X_test, y_train, y_test):
         # 4. Vẽ biểu đồ Scatter Plot
         _plot_scatter(y_test, y_pred, name, figures_dir)
 
-        # 5. In kết quả ra console
-        print(f"\n---> MÔ HÌNH: {name}")
-        print(f"     R²   = {metrics['R2']}")
-        print(f"     MAE  = {metrics['MAE']}")
-        print(f"     RMSE = {metrics['RMSE']}")
-
     # --- Tổng hợp kết quả vào DataFrame ---
     df_results = pd.DataFrame(results)
     cols = ["Model", "R2", "MAE", "RMSE"]
@@ -175,21 +164,15 @@ def train_and_evaluate_regression(X_train, X_test, y_train, y_test):
     results_path = os.path.join(outputs_dir, "regression_results.csv")
     df_results.to_csv(results_path, index=False)
 
-    # --- In bảng tổng hợp ---
     print("\n" + "=" * 60)
-    print("       BẢNG TỔNG HỢP SO SÁNH 5 MÔ HÌNH HỒI QUY")
+    print("        BẢNG SO SÁNH CÁC MÔ HÌNH HỒI QUY (GPA)")
     print("=" * 60)
     print(df_results.to_string(index=False))
-    print(f"\n ✅ Đã lưu bảng kết quả tại: {results_path}")
-    print(f" ✅ Đã lưu biểu đồ Scatter Plot tại thư mục: {figures_dir}")
-
+    print(f"\nĐã lưu bảng kết quả tại: {results_path}")
+    print(f"Đã lưu biểu đồ Scatter Plot tại thư mục: {figures_dir}")
     return models, df_results
 
-
-# ============================================================================
 # HÀM TIỆN ÍCH – CHUẨN BỊ DỮ LIỆU CHO HỒI QUY
-# ============================================================================
-
 def prepare_regression_data(df, target_col='GPA'):
     """
     Tách đặc trưng và nhãn cho bài toán hồi quy, chia Train/Test,
@@ -224,7 +207,7 @@ def prepare_regression_data(df, target_col='GPA'):
     X_train_scaled = scaler.fit_transform(X_train)
     X_test_scaled = scaler.transform(X_test)
 
-    print(f"\n📊 Chuẩn bị dữ liệu hồi quy:")
+    print(f"\nChuẩn bị dữ liệu hồi quy:")
     print(f"   - Số đặc trưng: {len(feature_cols)}")
     print(f"   - Tập Train: {X_train_scaled.shape[0]} mẫu")
     print(f"   - Tập Test : {X_test_scaled.shape[0]} mẫu")
