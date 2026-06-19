@@ -21,10 +21,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 
 
-# ============================================================================
 # HÀM PHỤ TRỢ
-# ============================================================================
-
 def _get_regression_models():
     """
     Khởi tạo 5 mô hình hồi quy cơ bản.
@@ -109,10 +106,7 @@ def _plot_scatter(y_true, y_pred, model_name, output_dir):
     plt.close(fig)
 
 
-# ============================================================================
 # HÀM CHÍNH – HUẤN LUYỆN & ĐÁNH GIÁ HỒI QUY
-# ============================================================================
-
 def train_and_evaluate_regression(X_train, X_test, y_train, y_test):
     """
     Huấn luyện 5 mô hình hồi quy dự đoán GPA, đánh giá bằng R², MAE, RMSE,
