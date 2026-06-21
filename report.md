@@ -1,4 +1,4 @@
-# Báo cáo So sánh Mô hình: Dự đoán GPA và Mức độ Stress
+ # Báo cáo So sánh Mô hình: Dự đoán GPA và Mức độ Stress
 
 ## 1. Mục tiêu
 
@@ -39,7 +39,7 @@ Kết quả kỳ vọng sẽ cung cấp cơ sở định lượng giúp sinh vi�
 | KNeighborsClassifier | 0.880 | 0.879 | 0.880 | 0.879 |
 | DecisionTreeClassifier | **1.000** | **1.000** | **1.000** | **1.000** |
 | RandomForestClassifier | **1.000** | **1.000** | **1.000** | **1.000** |
-| SVC | 0.970 | 0.970 | 0.970 | 0.970 |
+| SVC | 0.960 | 0.960 | 0.960 | 0.960 |
 
 ### Nhận xét
 
@@ -47,7 +47,7 @@ Kết quả kỳ vọng sẽ cung cấp cơ sở định lượng giúp sinh vi�
 - **Tuy nhiên, kết quả này cần được xem xét cẩn trọng** trước khi kết luận là "tốt nhất". Độ chính xác 100% trên một bài toán dự đoán hành vi con người (stress) từ vài biến sinh hoạt là **bất thường**, thường là dấu hiệu của:
   - **Data leakage**: nhãn `Stress_Level` có thể được gán dựa trực tiếp theo công thức/ngưỡng cố định của chính các biến input (ví dụ: Study > X & Sleep < Y → "High"), khiến cây quyết định "học vẹt" được đúng luật sinh dữ liệu thay vì học một mối quan hệ tổng quát.
   - Tập test quá nhỏ hoặc không độc lập với tập train.
-- Nếu loại trừ 2 mô hình có kết quả đáng nghi này, **`SVC` (97%)** là lựa chọn đáng tin cậy nhất — hiệu suất cao nhưng vẫn nằm trong phạm vi hợp lý, không tuyệt đối.
+- Nếu loại trừ 2 mô hình có kết quả đáng nghi này, **`SVC` (96%)** là lựa chọn đáng tin cậy nhất — hiệu suất cao nhưng vẫn nằm trong phạm vi hợp lý, không tuyệt đối.
 
 ### Kiểm tra Data Leakage trong code
 
@@ -77,7 +77,7 @@ Study_Hours > 8.05 → High
 | Bài toán | Mô hình tốt nhất | Lý do |
 |---|---|---|
 | Dự đoán GPA | `LinearRegression` | Quan hệ dữ liệu mang tính tuyến tính; mô hình đơn giản khái quát tốt hơn mô hình phức tạp |
-| Phân loại mức độ Stress | `SVC` *(đáng tin cậy nhất)* | Hiệu suất cao (97%) và hợp lý về thống kê; kết quả 100% của Decision Tree/Random Forest là do `Stress_Level` mang tính rule-based (đã kiểm chứng ở mục 3), không phản ánh khả năng tổng quát hóa thực sự |
+| Phân loại mức độ Stress | `SVC` *(đáng tin cậy nhất)* | Hiệu suất cao (96%) và hợp lý về thống kê; kết quả 100% của Decision Tree/Random Forest là do `Stress_Level` mang tính rule-based (đã kiểm chứng ở mục 3), không phản ánh khả năng tổng quát hóa thực sự |
 
 ---
 
@@ -93,7 +93,7 @@ Study_Hours > 8.05 → High
 | Social | 0.099 |
 | Extracurricular | 0.096 |
 
-![Feature importance đối với GPA](https://github.com/thienphuc0206/image-storage/blob/main/RandomForestRegressor_feature_importance.png?raw=true)
+![Feature importance đối với GPA](outputs/figures/GPA_RandomForestRegressor_feature_importance.png)
 
 ### 5.2. Đối với Stress_Level
 
@@ -105,7 +105,7 @@ Study_Hours > 8.05 → High
 | Social | 0.020 |
 | Extracurricular | 0.010 |
 
-![Feature importance đối với Stress_Level](https://github.com/thienphuc0206/image-storage/blob/main/RandomForestClassifier_feature_importance.png?raw=true)
+![Feature importance đối với Stress_Level](outputs/figures/StressLevel_RandomForestClassifier_feature_importance.png)
 
 ### Nhận xét
 
@@ -130,7 +130,7 @@ Câu hỏi này cần một **con số/khoảng giá trị cụ thể**, nên kh
 
 *Biểu đồ dưới đây chỉ tập trung vào `Study_Hours` và `Sleep_Hours` — không phải bỏ qua 3 biến còn lại, mà vì cả `feature_importances_` (mục 5) và luật của Decision Tree (mục 3) đều cho thấy đây là 2 biến duy nhất cần thiết để phân biệt mức Stress trong dữ liệu này.*
 
-![Phân tích vùng tối ưu Study/Sleep và GPA](https://github.com/thienphuc0206/image-storage/blob/main/optimal_zone_analysis.png?raw=true)
+![Phân tích vùng tối ưu Study/Sleep và GPA](outputs/figures/optimal_zone_analysis.png)
 
 **Biểu đồ trái** — phân bố Study vs Sleep, tô màu theo `Stress_Level`: vùng xanh (Study ≤ 8.05 & Sleep > 5.95) tập trung phần lớn điểm Low/Moderate (xanh lá/cam); ngoài vùng này chủ yếu là High (đỏ) — xác nhận trực quan ngưỡng mà Decision Tree đã suy ra.
 
@@ -169,9 +169,49 @@ Dựa trên nhóm sinh viên đạt **GPA thuộc top 25% cao nhất** (≥ 3.30
 
 ---
 
-## Phụ lục: Tệp mã nguồn liên quan
+## Phụ lục
+
+### Phụ lục A: Tệp mã nguồn liên quan
 
 | Phần report | File code tương ứng |
 |---|---|
 | Tính `feature_importances_` & vẽ `barplot` (mục 5) | `src/classification/importance_score.py` (hàm `calculate_importance_score`, `barplot_feature_importance`) → xuất ra `outputs/*_importance.csv`, `outputs/figures/*_feature_importance.png` |
 | Kiểm chứng rule-based & vùng tối ưu Study/Sleep (mục 3, 6) | `notebooks/verify_stress_rule_based.py`, `notebooks/eda_study_sleep_zone.py` → xuất ra `outputs/figures/optimal_zone_analysis.png` |
+
+---
+
+### Phụ lục B: Danh mục 21 Biểu đồ tự động sinh ra trong `outputs/figures/`
+
+Hệ thống pipeline (`run_pipeline.bat`) khi chạy sẽ tự động sinh và cập nhật 21 biểu đồ chẩn đoán và phân tích dữ liệu sau đây tại thư mục `outputs/figures/`:
+
+1. **Nhóm biểu đồ EDA & Phân tích tối ưu (4 tệp):**
+   - `optimal_zone_analysis.png`: Phân tích vùng tự học & giấc ngủ tối ưu đối với GPA và Stress.
+   - `correlation_matrix.png`: Ma trận tương quan giữa các đặc trưng số.
+   - `gpa_distribution.png`: Phân phối điểm GPA trong mẫu sinh viên.
+   - `stress_level_distribution.png`: Tần suất phân bố các mức độ Stress.
+
+2. **Nhóm biểu đồ Mô hình Phân loại (11 tệp):**
+   - *5 biểu đồ Ma trận nhầm lẫn (Confusion Matrix):*
+     - `DecisionTreeClassifier_confusion_matrix.png`
+     - `KNeighborsClassifier_confusion_matrix.png`
+     - `LogisticRegression_confusion_matrix.png`
+     - `RandomForestClassifier_confusion_matrix.png`
+     - `SVC_confusion_matrix.png`
+   - *5 biểu đồ Đường cong học tập (Learning Curve):*
+     - `DecisionTreeClassifier_learning_curve.png`
+     - `KNeighborsClassifier_learning_curve.png`
+     - `LogisticRegression_learning_curve.png`
+     - `RandomForestClassifier_learning_curve.png`
+     - `SVC_learning_curve.png`
+   - *1 biểu đồ Độ quan trọng đặc trưng (Feature Importance):*
+     - `StressLevel_RandomForestClassifier_feature_importance.png`
+
+3. **Nhóm biểu đồ Mô hình Hồi quy (6 tệp):**
+   - *5 biểu đồ Phân tán thực tế vs dự đoán (Scatter Plot):*
+     - `DecisionTreeRegressor_scatter_plot.png`
+     - `LinearRegression_scatter_plot.png`
+     - `RandomForestRegressor_scatter_plot.png`
+     - `Ridge_scatter_plot.png`
+     - `SVR_scatter_plot.png`
+   - *1 biểu đồ Độ quan trọng đặc trưng (Feature Importance):*
+     - `GPA_RandomForestRegressor_feature_importance.png`

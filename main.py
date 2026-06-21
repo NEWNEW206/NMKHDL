@@ -9,6 +9,7 @@ from src.data_preprocessing import clean_data, encode_stress_level, split_and_sc
 from src.feature_engineering import engineer_features
 from src.classification.train import train_and_evaluate_classification
 from src.classification.importance_score import calculate_importance_score, barplot_feature_importance
+from src.eda_visualizations import generate_eda_plots
 
 # Thử import module hồi quy (nếu đã hoàn thành)
 regression_available = False
@@ -25,6 +26,10 @@ def main():
         return
     df = pd.read_csv(filepath)
     df = clean_data(df)
+    
+    print("Generating EDA plots...")
+    generate_eda_plots(df, output_dir=os.path.join(BASE_DIR, "outputs", "figures"))
+    
     df = encode_stress_level(df)
     df = engineer_features(df)
     
