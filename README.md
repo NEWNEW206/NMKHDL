@@ -27,10 +27,10 @@ NMKHDL/
 ├── models/                    # Lưu trữ các mô hình đã huấn luyện (best_model.pkl)
 │
 ├── notebooks/                 # Thư mục chứa script kiểm thử và phân tích phụ trợ
+│   ├── EDA.ipynb              # Phân tích khám phá dữ liệu trực quan (Jupyter Notebook)
 │   └── test_preprocessing.py  # Script chạy thử nghiệm module tiền xử lý dữ liệu
 │
 ├── src/                       # Mã nguồn phát triển chính dạng module
-│   ├── EDA.ipynb              # Phân tích khám phá dữ liệu trực quan (Jupyter Notebook)
 │   ├── data_preprocessing.py  # Xử lý làm sạch và chuẩn hóa thang đo
 │   ├── feature_engineering.py # Tạo lập đặc trưng mới
 │   └── classification/        # Module phân loại chính (OOP)
