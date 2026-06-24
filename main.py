@@ -33,6 +33,13 @@ def main():
     df = encode_stress_level(df)
     df = engineer_features(df)
     
+    # Lưu lại dữ liệu đã qua tiền xử lý
+    processed_dir = os.path.join(BASE_DIR, "data", "processed")
+    os.makedirs(processed_dir, exist_ok=True)
+    processed_filepath = os.path.join(processed_dir, "student_lifestyle_processed.csv")
+    df.to_csv(processed_filepath, index=False)
+    print(f"Saved processed data to {processed_filepath}")
+    
     # Đảm bảo không còn giá trị khuyết thiếu trong cột Stress_Level
     df = df.dropna(subset=['Stress_Level'])
 

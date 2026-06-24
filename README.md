@@ -12,17 +12,19 @@ Dự án được xây dựng theo chuẩn Machine Learning Pipeline với các 
    - Vẽ **Learning Curve** và **Confusion Matrix** để phân tích hiện tượng Overfitting.
    - Lưu báo cáo điểm số (Accuracy, F1) và lưu file model xuất sắc nhất ra đĩa.
 
-## 2. Cấu trúc thư mục thực tế
+## 2. Cấu trúc thư mục
 
 ```text
 NMKHDL/
 │
 ├── data/                      # Dữ liệu dự án
-│   └── raw/                   # Dữ liệu gốc (student_lifestyle_dataset.csv)
+│   ├── raw/                   # Dữ liệu gốc (student_lifestyle_dataset.csv)
+│   └── processed/             # Dữ liệu đã qua tiền xử lý và trích xuất đặc trưng
 │
 ├── outputs/                   # Sản phẩm kết quả đầu ra
-│   ├── figures/               # Biểu đồ phân tích (Learning Curve, Ma trận nhầm lẫn)
-│   └── classification_results.csv # Bảng kết quả mô hình
+│   ├── figures/               # Biểu đồ phân tích (EDA, Classification, Regression)
+│   ├── classification_results.csv # Bảng kết quả mô hình phân loại
+│   └── regression_results.csv     # Bảng kết quả mô hình hồi quy
 │
 ├── models/                    # Lưu trữ các mô hình đã huấn luyện (best_model.pkl)
 │
@@ -33,12 +35,11 @@ NMKHDL/
 ├── src/                       # Mã nguồn phát triển chính dạng module
 │   ├── data_preprocessing.py  # Xử lý làm sạch và chuẩn hóa thang đo
 │   ├── feature_engineering.py # Tạo lập đặc trưng mới
-│   └── classification/        # Module phân loại chính (OOP)
-│       ├── models.py          # Các mô hình cơ sở
-│       ├── optimizer.py       # Tối ưu siêu tham số bằng Optuna
-│       ├── evaluate.py        # Vẽ Learning Curve, Confusion Matrix
-│       └── train.py           # Quản lý luồng huấn luyện phân loại
+│   ├── eda_visualizations.py  # Trực quan hóa dữ liệu EDA
+│   └── model_training.py      # Quản lý luồng huấn luyện phân loại và hồi quy
 │
+├── report.ipynb               # Báo cáo chính thức (Jupyter Notebook)
+├── report.md                  # Bản draft báo cáo (Markdown)
 ├── main.py                    # Chương trình chính điều phối pipeline chạy tự động
 ├── run_pipeline.bat           # File script tự động cài đặt và chạy (Windows)
 ├── run_pipeline.sh            # File script tự động cài đặt và chạy (Linux/Mac)
