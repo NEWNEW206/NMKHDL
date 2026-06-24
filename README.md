@@ -11,6 +11,13 @@ Dự án được xây dựng theo chuẩn Machine Learning Pipeline với các 
    - Ứng dụng **Optuna** và 5-Fold Cross Validation để tối ưu siêu tham số.
    - Vẽ **Learning Curve** và **Confusion Matrix** để phân tích hiện tượng Overfitting.
    - Lưu báo cáo điểm số (Accuracy, F1) và lưu file model xuất sắc nhất ra đĩa.
+5. **Hồi quy (Regression Pipeline)**:
+
+   * Khởi tạo 5 mô hình hồi quy cơ bản (**Linear Regression, Ridge Regression, Support Vector Regression (SVR), Decision Tree Regressor, Random Forest Regressor**).
+   * Sử dụng **Stress Level** (đã được mã hóa thành giá trị số liên tục) làm biến mục tiêu (**Target**).
+   * Ứng dụng **Optuna** kết hợp **5-Fold Cross Validation** trên tập huấn luyện để tối ưu siêu tham số, sử dụng **Mean Squared Error (MSE)** làm tiêu chí đánh giá.
+   * Vẽ **Learning Curve** (Training MSE và Validation MSE) cùng biểu đồ **Actual vs. Predicted** để đánh giá khả năng khái quát hóa và phân tích hiện tượng Overfitting/Underfitting.
+   * Lưu báo cáo kết quả (**MSE, RMSE, MAE, R² Score**) vào tệp `reports/regression_result.csv`.
 
 ## 2. Cấu trúc thư mục
 
