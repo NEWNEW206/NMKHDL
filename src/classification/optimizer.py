@@ -2,15 +2,16 @@
 import optuna
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
-from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import cross_val_score, KFold
 
 class ModelOptimizer:
     def __init__(self, X_train, y_train):
         self.X_train = X_train
         self.y_train = y_train
+        self.kf = KFold(n_splits=5, shuffle=True, random_state=42) #Sử dụng phương pháp K-Fold 5 để kiểm tra và tìm ra Hyperparameters tối ưu nhất 
 
     #Hàm tìm Hyperparameters tốt nhất cho RandomForestClassifier    
-    def optimize_random_forest(self, n_trials=20):
+    def optimize_random_forest(self, n_trials=25):
         def objective(trial):
             params = {
                 'n_estimators': trial.suggest_int('n_estimators', 50, 300),
@@ -19,7 +20,7 @@ class ModelOptimizer:
                 'random_state': 42
             }
             model = RandomForestClassifier(**params)
-            score = cross_val_score(model, self.X_train, self.y_train, cv=5, scoring='f1_weighted').mean()
+            score = cross_val_score(model, self.X_train, self.y_train, cv=self.kf, scoring='f1_weighted').mean()
             return score
 
         study = optuna.create_study(direction='maximize') #Tối ưa hóa score
@@ -29,7 +30,7 @@ class ModelOptimizer:
         return RandomForestClassifier(**best_params)
 
     #Hàm tìm Hyperparameters tốt nhất cho SVC    
-    def optimize_svc(self, n_trials=20):
+    def optimize_svc(self, n_trials=25):
         def objective(trial):
             params = {
                 'C': trial.suggest_float('C', 1e-3, 1e2, log=True),
@@ -39,7 +40,7 @@ class ModelOptimizer:
                 'random_state': 42
             }
             model = SVC(**params)
-            score = cross_val_score(model, self.X_train, self.y_train, cv=5, scoring='f1_weighted').mean()
+            score = cross_val_score(model, self.X_train, self.y_train, cv=self.kf, scoring='f1_weighted').mean()
             return score
 
         study = optuna.create_study(direction='maximize') #Tối ưa hóa score

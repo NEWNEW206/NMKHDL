@@ -12,12 +12,10 @@ Dự án được xây dựng theo chuẩn Machine Learning Pipeline với các 
    - Vẽ **Learning Curve** và **Confusion Matrix** để phân tích hiện tượng Overfitting.
    - Lưu báo cáo điểm số (Accuracy, F1) và lưu file model xuất sắc nhất ra đĩa.
 5. **Hồi quy (Regression Pipeline)**:
-
-   * Khởi tạo 5 mô hình hồi quy cơ bản (**Linear Regression, Ridge Regression, Support Vector Regression (SVR), Decision Tree Regressor, Random Forest Regressor**).
-   * Sử dụng **Stress Level** (đã được mã hóa thành giá trị số liên tục) làm biến mục tiêu (**Target**).
-   * Ứng dụng **Optuna** kết hợp **5-Fold Cross Validation** trên tập huấn luyện để tối ưu siêu tham số, sử dụng **Mean Squared Error (MSE)** làm tiêu chí đánh giá.
-   * Vẽ **Learning Curve** (Training MSE và Validation MSE) cùng biểu đồ **Actual vs. Predicted** để đánh giá khả năng khái quát hóa và phân tích hiện tượng Overfitting/Underfitting.
-   * Lưu báo cáo kết quả (**MSE, RMSE, MAE, R² Score**) vào tệp `reports/regression_result.csv`.
+   - Khởi tạo 5 mô hình hồi quy cơ bản (**Linear Regression, Ridge, Support Vector Regression (SVR), Decision Tree Regressor, Random Forest Regressor**).
+   - Sử dụng **GPA** làm biến mục tiêu (**Target**) để dự báo điểm số.
+   - Vẽ biểu đồ **Scatter Plot** (GPA Thực tế vs. GPA Dự đoán) để đánh giá khả năng khái quát hóa.
+   - Lưu 5 mô hình (.pkl) vào `outputs/regression/` và báo cáo kết quả (**MSE, RMSE, MAE, R² Score**) vào tệp `outputs/regression_results.csv`.
 
 ## 2. Cấu trúc thư mục
 
@@ -26,33 +24,36 @@ NMKHDL/
 │
 ├── data/                      # Dữ liệu dự án
 │   ├── raw/                   # Dữ liệu gốc (student_lifestyle_dataset.csv)
-│   └── processed/             # Dữ liệu đã qua tiền xử lý và trích xuất đặc trưng
+│   └── processed/             # Dữ liệu đã qua xử lý (student_lifestyle_processed.csv)
 │
-├── outputs/                   # Sản phẩm kết quả đầu ra
-│   ├── figures/               # Biểu đồ phân tích (EDA, Classification, Regression)
-│   ├── classification_results.csv # Bảng kết quả mô hình phân loại
-│   └── regression_results.csv     # Bảng kết quả mô hình hồi quy
+├── outputs/                   # Thư mục lưu kết quả sau khi chạy Pipeline
+│   ├── classification/        # Chứa 5 file mô hình (.pkl) phân loại
+│   ├── regression/            # Chứa 5 file mô hình (.pkl) hồi quy
+│   ├── figures/               # Biểu đồ phân tích trực quan
+│   │   ├── classification/    # ROC, Heatmap, Confusion Matrix, Learning Curve
+│   │   └── regression/        # Scatter Plot, Feature Importance
+│   ├── classification_results.csv # Bảng điểm số Classification
+│   └── regression_results.csv     # Bảng điểm số Regression
 │
-├── models/                    # Lưu trữ các mô hình đã huấn luyện (best_model.pkl)
+├── notebooks/                 # Script kiểm thử và phân tích
+│   ├── EDA.ipynb              # Phân tích khám phá dữ liệu trực quan (Jupyter)
+│   └── test_preprocessing.py  # Script chạy thử nghiệm module tiền xử lý
 │
-├── notebooks/                 # Thư mục chứa script kiểm thử và phân tích phụ trợ
-│   ├── EDA.ipynb              # Phân tích khám phá dữ liệu trực quan (Jupyter Notebook)
-│   └── test_preprocessing.py  # Script chạy thử nghiệm module tiền xử lý dữ liệu
-│
-├── src/                       # Mã nguồn phát triển chính dạng module
-│   ├── data_preprocessing.py  # Xử lý làm sạch và chuẩn hóa thang đo
+├── src/                       # Mã nguồn phát triển dạng module
+│   ├── classification/        # Module tối ưu thuật toán Phân loại
+│   ├── regression/            # Module tối ưu thuật toán Hồi quy
+│   ├── data_preprocessing.py  # Làm sạch và chuẩn hóa thang đo
 │   ├── feature_engineering.py # Tạo lập đặc trưng mới
-│   ├── eda_visualizations.py  # Trực quan hóa dữ liệu EDA
-│   └── model_training.py      # Quản lý luồng huấn luyện phân loại và hồi quy
+│   └── eda_visualizations.py  # Trực quan hóa dữ liệu EDA
 │
 ├── report.ipynb               # Báo cáo chính thức (Jupyter Notebook)
 ├── report.md                  # Bản draft báo cáo (Markdown)
-├── main.py                    # Chương trình chính điều phối pipeline chạy tự động
-├── run_pipeline.bat           # File script tự động cài đặt và chạy (Windows)
-├── run_pipeline.sh            # File script tự động cài đặt và chạy (Linux/Mac)
-├── Dockerfile                 # File cấu hình môi trường Docker
+├── main.py                    # Script chính kích hoạt toàn bộ luồng Pipeline
+├── run_pipeline.bat           # File thực thi chạy tự động (Windows)
+├── run_pipeline.sh            # File thực thi chạy tự động (Linux/Mac)
+├── Dockerfile                 # Cấu hình đóng gói hệ thống Docker
 ├── requirements.txt           # Danh sách các thư viện hỗ trợ
-└── README.md                  # Hướng dẫn chạy dự án và thông tin chi tiết
+└── README.md                  # Hướng dẫn chạy dự án
 ```
 
 ## 3. Hướng dẫn Chạy Dự án
@@ -82,5 +83,9 @@ python main.py
 Đảm bảo máy bạn đã cài sẵn Docker Desktop.
 ```bash
 docker build -t student_lifestyle_ml .
-docker run student_lifestyle_ml
+
+# Chạy Docker và đồng bộ thư mục outputs ra ngoài máy thật để xem biểu đồ
+docker run -v "%cd%/outputs:/app/outputs" student_lifestyle_ml   # Dành cho Windows CMD
+# Hoặc: docker run -v "$(pwd)/outputs:/app/outputs" student_lifestyle_ml   # Dành cho Mac/Linux
+
 ```

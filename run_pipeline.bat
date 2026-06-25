@@ -9,7 +9,6 @@ pip install -r requirements.txt
 echo.
 echo [2] Dang tien hanh chay Pipeline Machine Learning...
 set PYTHONIOENCODING=utf-8
-
 python main.py
 
 echo.
