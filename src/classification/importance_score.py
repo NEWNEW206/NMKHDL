@@ -52,7 +52,7 @@ def barplot_feature_importance(importance_df, model_name, output_dir=None):
         ax.text(
             width + 0.01,
             p.get_y() + p.get_height() / 2,
-            f'{width:.3f}',
+            f'{width:.4f}',
             va='center',
             ha='left',
             fontsize=10,

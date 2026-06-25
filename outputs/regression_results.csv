@@ -1,6 +1,6 @@
 Model,R2,MAE,RMSE
+LinearRegression,0.5494,0.1639,0.2051
 Ridge,0.5493,0.1639,0.2051
-LinearRegression,0.549,0.1638,0.2052
 DecisionTreeRegressor,0.5342,0.1671,0.2085
 SVR,0.5005,0.1713,0.216
 RandomForestRegressor,0.4623,0.1792,0.224
